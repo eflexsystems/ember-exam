@@ -3,7 +3,7 @@ import {
   dependencySatisfies,
   importSync,
 } from '@embroider/macros';
-import * as TestemOutput from 'ember-exam/test-support/-private/patch-testem-output';
+import * as TestemOutput from '@eflexsystems/ember-exam/test-support/-private/patch-testem-output';
 
 if (macroCondition(dependencySatisfies('ember-mocha', '*'))) {
   let { describe, it } = importSync('mocha');

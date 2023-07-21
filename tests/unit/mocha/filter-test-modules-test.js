@@ -6,7 +6,7 @@ import {
 import {
   convertFilePathToModulePath,
   filterTestModules,
-} from 'ember-exam/test-support/-private/filter-test-modules';
+} from '@eflexsystems/ember-exam/test-support/-private/filter-test-modules';
 
 if (macroCondition(dependencySatisfies('ember-mocha', '*'))) {
   let { describe, it, beforeEach, afterEach } = importSync('mocha');

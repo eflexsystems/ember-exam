@@ -1,4 +1,4 @@
-import loadEmberExam from 'ember-exam/test-support/load';
+import loadEmberExam from '@eflexsystems/ember-exam/test-support/load';
 import {
   dependencySatisfies,
   macroCondition,

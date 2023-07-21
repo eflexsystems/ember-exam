@@ -1,6 +1,6 @@
 import { setResolver } from '@ember/test-helpers';
 import resolver from './helpers/resolver';
-import loadEmberExam from 'ember-exam/test-support/load';
+import loadEmberExam from '@eflexsystems/ember-exam/test-support/load';
 
 const framework = require.has('ember-qunit') ? 'qunit' : 'mocha';
 const oppositeFramework = !require.has('ember-qunit') ? 'qunit' : 'mocha';

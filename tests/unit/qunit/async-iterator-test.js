@@ -1,4 +1,4 @@
-import AsyncIterator from 'ember-exam/test-support/-private/async-iterator';
+import AsyncIterator from '@eflexsystems/ember-exam/test-support/-private/async-iterator';
 import {
   macroCondition,
   dependencySatisfies,

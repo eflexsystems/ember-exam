@@ -1,7 +1,7 @@
 import {
   convertFilePathToModulePath,
   filterTestModules,
-} from 'ember-exam/test-support/-private/filter-test-modules';
+} from '@eflexsystems/ember-exam/test-support/-private/filter-test-modules';
 import {
   macroCondition,
   dependencySatisfies,

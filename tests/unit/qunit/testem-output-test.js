@@ -1,4 +1,4 @@
-import * as TestemOutput from 'ember-exam/test-support/-private/patch-testem-output';
+import * as TestemOutput from '@eflexsystems/ember-exam/test-support/-private/patch-testem-output';
 import {
   macroCondition,
   dependencySatisfies,

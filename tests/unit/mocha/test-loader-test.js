@@ -3,7 +3,7 @@ import {
   dependencySatisfies,
   importSync,
 } from '@embroider/macros';
-import EmberExamTestLoader from 'ember-exam/test-support/-private/ember-exam-mocha-test-loader';
+import EmberExamTestLoader from '@eflexsystems/ember-exam/test-support/-private/ember-exam-mocha-test-loader';
 
 if (macroCondition(dependencySatisfies('ember-mocha', '*'))) {
   let { describe, it, beforeEach, afterEach } = importSync('mocha');

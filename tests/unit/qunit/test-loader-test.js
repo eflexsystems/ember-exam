@@ -1,4 +1,4 @@
-import EmberExamTestLoader from 'ember-exam/test-support/-private/ember-exam-qunit-test-loader';
+import EmberExamTestLoader from '@eflexsystems/ember-exam/test-support/-private/ember-exam-qunit-test-loader';
 import {
   macroCondition,
   dependencySatisfies,

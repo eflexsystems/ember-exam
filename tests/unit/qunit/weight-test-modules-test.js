@@ -1,4 +1,4 @@
-import weightTestModules from 'ember-exam/test-support/-private/weight-test-modules';
+import weightTestModules from '@eflexsystems/ember-exam/test-support/-private/weight-test-modules';
 import {
   macroCondition,
   dependencySatisfies,

@@ -3,7 +3,7 @@ import {
   dependencySatisfies,
   importSync,
 } from '@embroider/macros';
-import weightTestModules from 'ember-exam/test-support/-private/weight-test-modules';
+import weightTestModules from '@eflexsystems/ember-exam/test-support/-private/weight-test-modules';
 
 if (macroCondition(dependencySatisfies('ember-mocha', '*'))) {
   let { describe, it } = importSync('mocha');
