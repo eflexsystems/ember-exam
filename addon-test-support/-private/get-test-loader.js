@@ -17,7 +17,9 @@ export default function getTestLoader() {
       './ember-exam-qunit-test-loader'
     );
     return EmberExamQUnitTestLoader['default'];
-  } else if (macroCondition(dependencySatisfies('ember-mocha', '*'))) {
+  } else if (
+    macroCondition(dependencySatisfies('@eflexsystems/ember-mocha', '*'))
+  ) {
     const EmberExamMochaTestLoader = importSync(
       './ember-exam-mocha-test-loader'
     );

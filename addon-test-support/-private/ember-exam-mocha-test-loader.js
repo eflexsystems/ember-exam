@@ -1,7 +1,7 @@
 import getUrlParams from './get-url-params';
 import splitTestModules from './split-test-modules';
 import { filterTestModules } from './filter-test-modules';
-import { TestLoader } from 'ember-mocha/test-loader';
+import { TestLoader } from '@eflexsystems/ember-mocha/test-loader';
 
 /**
  * EmberExamMochaTestLoader extends ember-mocha/test-loader used by `ember test`, since it

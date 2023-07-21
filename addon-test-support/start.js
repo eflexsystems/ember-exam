@@ -38,8 +38,10 @@ export default function start(qunitOptions) {
   let emberTestFramework;
   if (macroCondition(dependencySatisfies('ember-qunit', '*'))) {
     emberTestFramework = importSync('ember-qunit');
-  } else if (macroCondition(dependencySatisfies('ember-mocha', '*'))) {
-    emberTestFramework = importSync('ember-mocha');
+  } else if (
+    macroCondition(dependencySatisfies('@eflexsystems/ember-mocha', '*'))
+  ) {
+    emberTestFramework = importSync('@eflexsystems/ember-mocha');
   }
 
   if (emberTestFramework.start) {
