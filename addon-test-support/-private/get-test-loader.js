@@ -14,14 +14,14 @@ import {
 export default function getTestLoader() {
   if (macroCondition(dependencySatisfies('ember-qunit', '*'))) {
     const EmberExamQUnitTestLoader = importSync(
-      './ember-exam-qunit-test-loader'
+      '@eflexsystems/ember-exam/test-support/-private/ember-exam-qunit-test-loader'
     );
     return EmberExamQUnitTestLoader['default'];
   } else if (
     macroCondition(dependencySatisfies('@eflexsystems/ember-mocha', '*'))
   ) {
     const EmberExamMochaTestLoader = importSync(
-      './ember-exam-mocha-test-loader'
+      '@eflexsystems/ember-exam/test-support/-private/ember-exam-mocha-test-loader'
     );
     return EmberExamMochaTestLoader['default'];
   }
