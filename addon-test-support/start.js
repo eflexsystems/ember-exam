@@ -24,8 +24,8 @@ function loadTests(testLoader) {
  * @function start
  * @param {*} qunitOptions
  */
-export default function start(qunitOptions) {
-  const modifiedOptions = qunitOptions || Object.create(null);
+export default function start(options) {
+  const modifiedOptions = options || Object.create(null);
   modifiedOptions.loadTests = false;
 
   const testLoader = loadEmberExam();
