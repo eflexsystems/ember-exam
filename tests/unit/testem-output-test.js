@@ -1,8 +1,8 @@
 import * as TestemOutput from '@eflexsystems/ember-exam/test-support/-private/patch-testem-output';
 import { expect } from 'chai';
 
-describe('Unit | Mocha | patch-testem-output', () => {
-  describe('`preserveTestName` is passed', () => {
+describe('Unit | Mocha | patch-testem-output', function () {
+  describe('`preserveTestName` is passed', function () {
     it('does not add partition number to test name when `split` is passed', function () {
       expect(
         TestemOutput.updateTestName(
@@ -50,7 +50,7 @@ describe('Unit | Mocha | patch-testem-output', () => {
       ).to.equal('test_module | test_name');
     });
   });
-  describe('`preserveTestName` is not passed', () => {
+  describe('`preserveTestName` is not passed', function () {
     it('adds partition number to test name when `split` is passed', function () {
       expect(
         TestemOutput.updateTestName(

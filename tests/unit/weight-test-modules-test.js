@@ -1,7 +1,7 @@
 import weightTestModules from '@eflexsystems/ember-exam/test-support/-private/weight-test-modules';
 import { expect } from 'chai';
 
-describe('Unit | Mocha | weight-test-modules', () => {
+describe('Unit | Mocha | weight-test-modules', function () {
   it('should sort a list of file paths by weight', function () {
     const listOfModules = [
       '/eslint/test-1-test',
