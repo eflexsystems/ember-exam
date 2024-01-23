@@ -12,7 +12,7 @@ if (macroCondition(dependencySatisfies('ember-mocha', '*'))) {
   let { describe, it, beforeEach, afterEach } = importSync('mocha');
   let { expect } = importSync('chai');
 
-  describe('Unit | Mocha | filter-test-modules', () => {
+  describe('Unit | filter-test-modules', () => {
     describe('convertFilePathToModulePath', () => {
       it('should return an input string without file extension when the input contains file extension', () => {
         expect(
@@ -120,14 +120,14 @@ if (macroCondition(dependencySatisfies('ember-mocha', '*'))) {
         ).to.deep.equal(['dummy/tests/unit/foo-test']);
       });
 
-      it('should return a test module matched with test file path with wildcard', () => {
+      it('should return a unit test module matched with test file path with wildcard', () => {
         expect(filterTestModules(modules, null, '/unit/*')).to.deep.equal([
           'dummy/tests/unit/foo-test',
           'dummy/tests/unit/bar-test',
         ]);
       });
 
-      it('should return a test module matched with test file path with wildcard', () => {
+      it('should return an integration test module matched with test file path with wildcard', () => {
         expect(filterTestModules(modules, null, '/tests/*/foo*')).to.deep.equal(
           ['dummy/tests/integration/foo-test', 'dummy/tests/unit/foo-test'],
         );

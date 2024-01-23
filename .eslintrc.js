@@ -69,6 +69,9 @@ module.exports = {
       // Test files:
       files: ['tests/**/*-test.{js,ts}'],
       extends: ['plugin:mocha/recommended'],
+      rules: {
+        'mocha/no-setup-in-describe': 'off',
+      },
     },
   ],
 };
