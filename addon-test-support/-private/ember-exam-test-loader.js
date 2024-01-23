@@ -9,7 +9,7 @@ import { TestLoader } from '@eflexsystems/ember-mocha/test-loader';
  * @class EmberExamMochaTestLoader
  * @extends {TestLoader}
  */
-export default class EmberExamMochaTestLoader extends TestLoader {
+export default class EmberExamTestLoader extends TestLoader {
   constructor(testem, urlParams) {
     super();
     this._testModules = [];
