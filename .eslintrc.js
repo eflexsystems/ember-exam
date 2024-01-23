@@ -59,6 +59,7 @@ module.exports = {
       },
       env: {
         node: true,
+        mocha: true,
       },
       rules: {
         'ember/no-test-support-import': 'off',
@@ -67,7 +68,7 @@ module.exports = {
     {
       // Test files:
       files: ['tests/**/*-test.{js,ts}'],
-      extends: ['plugin:qunit/recommended'],
+      extends: ['plugin:mocha/recommended'],
     },
   ],
 };
