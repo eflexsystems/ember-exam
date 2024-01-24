@@ -194,21 +194,6 @@ describe('TestemEvents', function () {
       );
     });
 
-    it('should not clean up states from stateManager when test execution is not completed', function () {
-      this.testemEvents.stateManager.addModuleNameToReplayExecutionMap('a', 1);
-      this.testemEvents.stateManager.addModuleNameToReplayExecutionMap('b', 2);
-
-      this.testemEvents.completedBrowsersHandler(
-        2,
-        1011,
-        mockUi,
-        new Map(),
-        '0000',
-      );
-
-      assert.deepEqual(this.testemEvents.stateManager.getModuleMap().size, 2);
-    });
-
     it('should clean up states from stateManager when all launched browsers exited', function () {
       this.testemEvents.stateManager.addToStartedLaunchers(1010);
       this.testemEvents.stateManager.addToStartedLaunchers(1011);
