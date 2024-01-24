@@ -18,97 +18,6 @@ describe('TestemEvents', function () {
     fs.removeSync(fixtureDir);
   });
 
-  describe('nextModuleResponse', function () {
-    const socket = {
-      events: [],
-      emit: function (event, payload) {
-        this.events.push(event);
-
-        if (payload) {
-          this.events.push(payload);
-        }
-      },
-      reset: function () {
-        this.events.length = 0;
-      },
-    };
-
-    const fooResponse = {
-      done: false,
-      value: 'foo',
-    };
-
-    const emptyMap = new Map();
-
-    afterEach(function () {
-      socket.reset();
-    });
-
-    it('should fire next-module-response event and save the moduleName to stateManager.moduleMap when write-execution-file is true', function () {
-      this.testemEvents.stateManager.setTestModuleQueue(this.moduleQueue);
-      this.testemEvents.nextModuleResponse(1, socket, true);
-
-      assert.deepEqual(
-        socket.events,
-        ['testem:next-module-response', fooResponse],
-        'testem:next-module-response event was emitted with payload foo',
-      );
-      assert.deepEqual(
-        this.testemEvents.stateManager.getModuleMap().values().next().value,
-        ['foo'],
-        'module was correctly saved to the moduleMap',
-      );
-    });
-
-    it('should not save the moduleName to stateManager.moduleMap when write-execution-file is false', function () {
-      this.testemEvents.stateManager.setReplayExecutionModuleQueue([], 1);
-      this.testemEvents.nextModuleResponse(1, socket, false);
-
-      assert.deepEqual(
-        this.testemEvents.stateManager.getModuleMap(),
-        emptyMap,
-        'moduleMap should be in its initial state',
-      );
-    });
-
-    it('should throw error if no moduleQueues were set', function () {
-      assert.throws(
-        () => this.testemEvents.nextModuleResponse(1, socket, false, 'dev'),
-        /No moduleQueue was set/,
-        'No moduleQueue error was thrown',
-      );
-    });
-  });
-
-  describe('recordFailedBrowserId', function () {
-    const launcher = {
-      settings: {
-        test_page: 'browser=1',
-      },
-    };
-
-    it('record new browserId if test failed', function () {
-      this.testemEvents.recordFailedBrowserId(launcher, {});
-
-      assert.deepEqual(
-        this.testemEvents.stateManager.getFailedBrowsers(),
-        [1],
-        'failed browserId 1 is correctly recorded',
-      );
-    });
-
-    it('does not record browserId that has already been recorded', function () {
-      this.testemEvents.recordFailedBrowserId(launcher, {});
-      this.testemEvents.recordFailedBrowserId(launcher, {});
-
-      assert.deepEqual(
-        this.testemEvents.stateManager.getFailedBrowsers(),
-        [1],
-        'failed browserId 1 is correctly recorded only once',
-      );
-    });
-  });
-
   describe('completedBrowsersHandler', function () {
     const mockUi = {
       writeLine: () => {},
@@ -119,7 +28,7 @@ describe('TestemEvents', function () {
         2,
         1,
         mockUi,
-        new Map([['writeExecutionFile', false]]),
+        new Map(),
         '0000',
       );
 
@@ -275,7 +184,7 @@ describe('TestemEvents', function () {
         2,
         1,
         mockUi,
-        new Map([['writeExecutionFile', false]]),
+        new Map(),
         '0000',
       );
 

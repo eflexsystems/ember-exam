@@ -4,7 +4,6 @@ const assert = require('assert');
 const sinon = require('sinon');
 const {
   combineOptionValueIntoArray,
-  getBrowserId,
   getCustomBaseUrl,
   getMultipleTestPages,
   getTestUrlFromTestemConfig,
@@ -37,28 +36,6 @@ describe('TestPageHelper', function () {
         combineOptionValueIntoArray([1, '3..6']),
         [1, 3, 4, 5, 6],
       );
-    });
-  });
-
-  describe('getBrowserId', function () {
-    it('should return the correct browserId', function () {
-      const launcher = {
-        settings: {
-          test_page: 'browser=1',
-        },
-      };
-      assert.strictEqual(getBrowserId(launcher), '1');
-    });
-
-    it('should throw an error if the launcher does not have test page set', function () {
-      const warnStub = sinon.stub(console, 'warn');
-      const launcher = {
-        foo: 'bar',
-      };
-      assert.strictEqual(getBrowserId(launcher), 0);
-      sinon.assert.calledOnce(warnStub);
-      sinon.assert.calledWithMatch(warnStub, /Launcher Settings:/);
-      warnStub.restore();
     });
   });
 

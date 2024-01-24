@@ -1,16 +1,7 @@
 'use strict';
 
 const assert = require('assert');
-const fixturify = require('fixturify');
-const fs = require('fs-extra');
 const TestOptionsValidator = require('../../../lib/utils/tests-options-validator');
-const TestExecutionJson = {
-  numberOfBrowsers: 2,
-  browserToModuleMap: {
-    1: ['/tests/integration/components/my-component-test'],
-    2: ['/tests/integration/components/navigating-component-test'],
-  },
-};
 
 describe('TestOptionsValidator', function () {
   function validateCommand(validator, cmd) {
@@ -152,14 +143,6 @@ describe('TestOptionsValidator', function () {
       );
     });
 
-    it('should throw an error if used with `replay-execution`', function () {
-      shouldThrow(
-        'Parallel',
-        { replayExecution: 'abc', parallel: 1 },
-        /You must not use the `replay-execution` option with the `parallel` option./,
-      );
-    });
-
     it('should throw an error if used with `replay-browser`', function () {
       shouldThrow(
         'Parallel',
@@ -178,140 +161,6 @@ describe('TestOptionsValidator', function () {
 
     it('should return true', function () {
       shouldEqual('Parallel', { split: 2, parallel: 1 }, true);
-    });
-  });
-
-  describe('ShouldWriteExecutionFile', function () {
-    it('should return false when not passed', function () {
-      shouldEqual(
-        'writeExecutionFile',
-        {
-          parallel: 2,
-          launch: 'false',
-        },
-        false,
-      );
-    });
-
-    it('should throw an error if `write-execution-file` is used without `load-balance`', function () {
-      shouldThrow(
-        'writeExecutionFile',
-        { writeExecutionFile: true },
-        /You must run test suite with the `load-balance` option in order to use the `write-execution-file` option./,
-      );
-    });
-
-    it('should throw an error if `write-execution-file` is used without `load-balance`', function () {
-      shouldThrow(
-        'writeExecutionFile',
-        {
-          split: 2,
-          partition: 1,
-          writeExecutionFile: true,
-        },
-        /You must run test suite with the `load-balance` option in order to use the `write-execution-file` option./,
-      );
-    });
-
-    it('should throw an error if `write-execution-file` is used without `load-balance`', function () {
-      shouldThrow(
-        'writeExecutionFile',
-        {
-          replayExecution: 'test-execution-0000000.json',
-          replayBrowser: [1, 2],
-          writeExecutionFile: true,
-        },
-        /You must run test suite with the `load-balance` option in order to use the `write-execution-file` option./,
-      );
-    });
-
-    it('should throw an error if `write-execution-file` is used with `no-launch`', function () {
-      shouldThrow(
-        'writeExecutionFile',
-        {
-          parallel: 1,
-          launch: 'false',
-          writeExecutionFile: true,
-        },
-        /You must not use no-launch with write-execution-file option./,
-      );
-    });
-
-    it('should return true', function () {
-      shouldEqual(
-        'writeExecutionFile',
-        {
-          parallel: 2,
-          writeExecutionFile: true,
-        },
-        true,
-      );
-    });
-  });
-
-  describe('shouldReplayExecution', function () {
-    before(function () {
-      fixturify.writeSync(process.cwd(), {
-        'test-execution-0000000.json': JSON.stringify(TestExecutionJson),
-      });
-    });
-    after(function () {
-      fs.unlink('test-execution-0000000.json');
-    });
-
-    it('should throw an error if `replay-browser` contains a value less than 1', function () {
-      shouldThrow(
-        'ReplayExecution',
-        {
-          replayExecution: 'test-execution-0000000.json',
-          replayBrowser: [1, 0],
-        },
-        /You must specify replay-browser values greater than or equal to 1./,
-      );
-    });
-
-    it('should throw an error if `replay-browser` contains duplicate values', function () {
-      shouldThrow(
-        'ReplayExecution',
-        {
-          replayExecution: 'test-execution-0000000.json',
-          replayBrowser: [1, 2, 1],
-        },
-        /You cannot specify the same replayBrowser value twice. 1 is repeated./,
-      );
-    });
-
-    it('should throw an error if `replay-browser` contains an invalid browser number', function () {
-      shouldThrow(
-        'ReplayExecution',
-        {
-          replayExecution: 'test-execution-0000000.json',
-          replayBrowser: [3, 1],
-        },
-        /You must specify replayBrowser value smaller than a number of browsers in the specified json file./,
-      );
-    });
-
-    it('should throw an error if `no-launch` is used with `replay-execution`.', function () {
-      shouldThrow(
-        'ReplayExecution',
-        {
-          replayExecution: 'test-execution-0000000.json',
-          launch: 'false',
-        },
-        /You must not use `no-launch` option with the `replay-execution` option./,
-      );
-    });
-
-    it('should return true', function () {
-      shouldEqual(
-        'ReplayExecution',
-        {
-          replayExecution: 'test-execution-0000000.json',
-          replayBrowser: [1, 2],
-        },
-        true,
-      );
     });
   });
 });
