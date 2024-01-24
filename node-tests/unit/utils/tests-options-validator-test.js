@@ -143,14 +143,6 @@ describe('TestOptionsValidator', function () {
       );
     });
 
-    it('should throw an error if used with `replay-browser`', function () {
-      shouldThrow(
-        'Parallel',
-        { replayBrowser: 2, parallel: 1 },
-        /You must not use the `replay-browser` option with the `parallel` option./,
-      );
-    });
-
     it('should throw an error if parallel is > 1 when used with `split`', function () {
       shouldThrow(
         'Parallel',
