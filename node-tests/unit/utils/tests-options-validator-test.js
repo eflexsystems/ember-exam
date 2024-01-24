@@ -23,8 +23,6 @@ describe('TestOptionsValidator', function () {
         return validator.validateParallel();
       case 'writeExecutionFile':
         return validator.validateWriteExecutionFile();
-      case 'LoadBalance':
-        return validator.validateLoadBalance();
       case 'ReplayExecution':
         return validator.validateReplayExecution();
       default:
