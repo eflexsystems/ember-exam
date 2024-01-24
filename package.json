@@ -62,6 +62,7 @@
     "@embroider/test-setup": "^3.0.3",
     "@release-it-plugins/lerna-changelog": "^6.1.0",
     "auto-dist-tag": "^2.1.1",
+    "chai": "^5.0.0",
     "codeclimate-test-reporter": "^0.5.1",
     "concurrently": "^8.2.2",
     "ember-cli": "^5.6.0",
