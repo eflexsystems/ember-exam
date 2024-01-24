@@ -1,4 +1,4 @@
-import EmberExamTestLoader from '@eflexsystems/ember-exam/test-support/-private/ember-exam-mocha-test-loader';
+import EmberExamTestLoader from '@eflexsystems/ember-exam/test-support/-private/ember-exam-test-loader';
 import { expect } from 'chai';
 
 describe('Unit | Mocha | test-loader', function () {
