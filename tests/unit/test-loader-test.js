@@ -11,13 +11,9 @@ describe('Unit | Mocha | test-loader', function () {
 
     window.requirejs.entries = {
       'test-1-test': true,
-      'test-1-test.jshint': true,
       'test-2-test': true,
-      'test-2-test.jshint': true,
       'test-3-test': true,
-      'test-3-test.jshint': true,
       'test-4-test': true,
-      'test-4-test.jshint': true,
     };
     this.originalURLParams = EmberExamTestLoader._urlParams;
   });
@@ -31,10 +27,6 @@ describe('Unit | Mocha | test-loader', function () {
     testLoader.loadModules();
 
     expect(this.requiredModules).to.deep.equal([
-      'test-1-test.jshint',
-      'test-2-test.jshint',
-      'test-3-test.jshint',
-      'test-4-test.jshint',
       'test-1-test',
       'test-2-test',
       'test-3-test',
@@ -49,10 +41,7 @@ describe('Unit | Mocha | test-loader', function () {
     );
     testLoader.loadModules();
 
-    expect(this.requiredModules).to.deep.equal([
-      'test-3-test.jshint',
-      'test-3-test',
-    ]);
+    expect(this.requiredModules).to.deep.equal(['test-3-test']);
   });
 
   it('loads modules from multiple specified partitions', function () {
@@ -62,12 +51,7 @@ describe('Unit | Mocha | test-loader', function () {
     );
     testLoader.loadModules();
 
-    expect(this.requiredModules).to.deep.equal([
-      'test-1-test.jshint',
-      'test-1-test',
-      'test-3-test.jshint',
-      'test-3-test',
-    ]);
+    expect(this.requiredModules).to.deep.equal(['test-1-test', 'test-3-test']);
   });
 
   it('loads modules from the first partition by default', function () {
@@ -77,10 +61,7 @@ describe('Unit | Mocha | test-loader', function () {
     );
     testLoader.loadModules();
 
-    expect(this.requiredModules).to.deep.equal([
-      'test-1-test.jshint',
-      'test-1-test',
-    ]);
+    expect(this.requiredModules).to.deep.equal(['test-1-test']);
   });
 
   it('handles params as strings', function () {
@@ -90,10 +71,7 @@ describe('Unit | Mocha | test-loader', function () {
     );
     testLoader.loadModules();
 
-    expect(this.requiredModules).to.deep.equal([
-      'test-3-test.jshint',
-      'test-3-test',
-    ]);
+    expect(this.requiredModules).to.deep.equal(['test-3-test']);
   });
 
   it('throws an error if splitting less than one', function () {
@@ -178,28 +156,7 @@ describe('Unit | Mocha | test-loader', function () {
     testLoader.loadModules();
 
     // ember-cli-mocha doesn't support disabling linting by url param
-    expect(this.requiredModules).to.deep.equal([
-      'test-4-test.jshint',
-      'test-4-test',
-    ]);
-  });
-
-  it('load works without non-lint tests', function () {
-    const testLoader = new EmberExamTestLoader(
-      this.testem,
-      new Map().set('partition', 4).set('split', 4),
-    );
-
-    window.requirejs.entries = {
-      'test-1-test.jshint': true,
-      'test-2-test.jshint': true,
-      'test-3-test.jshint': true,
-      'test-4-test.jshint': true,
-    };
-
-    testLoader.loadModules();
-
-    expect(this.requiredModules).to.deep.equal(['test-4-test.jshint']);
+    expect(this.requiredModules).to.deep.equal(['test-4-test']);
   });
 
   it('load works with a double-digit single partition', function () {
