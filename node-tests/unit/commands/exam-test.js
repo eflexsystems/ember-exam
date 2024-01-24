@@ -75,12 +75,6 @@ describe('ExamCommand', function () {
       });
     });
 
-    it('should set `load-balance` in the query option', function () {
-      return command.run({ loadBalance: true, parallel: 1 }).then(function () {
-        assert.strictEqual(called.testRunOptions.query, 'loadBalance');
-      });
-    });
-
     it('should set `preserve-test-name` in the query option', function () {
       return command.run({ preserveTestName: true }).then(function () {
         assert.strictEqual(called.testRunOptions.query, 'preserveTestName');

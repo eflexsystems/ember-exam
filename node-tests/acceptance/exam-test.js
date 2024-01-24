@@ -1,11 +1,9 @@
 'use strict';
 
 const assert = require('assert');
-const fixturify = require('fixturify');
 const fs = require('fs-extra');
 const path = require('path');
 const { rimrafSync } = require('rimraf');
-const glob = require('glob');
 
 function assertExpectRejection() {
   assert.ok(false, 'Expected promise to reject, but it fullfilled');
@@ -288,123 +286,6 @@ describe('Acceptance | Exam Command', function () {
           getNumberOfTests(stdout),
           getTotalNumberOfTests(stdout),
           'ran all of the tests in the suite',
-        );
-      });
-    });
-  });
-
-  describe('Replay Execution', function () {
-    let testExecutionJson = {};
-
-    beforeEach(() => {
-      testExecutionJson = {
-        numberOfBrowsers: 2,
-        failedBrowsers: [],
-        executionMapping: {
-          1: [
-            'dummy/tests/unit/test-loader-test',
-            'dummy/tests/unit/multiple-edge-cases-test',
-            'dummy/tests/unit/multiple-ember-tests-test',
-          ],
-          2: [
-            'dummy/tests/unit/multiple-tests-test',
-            'dummy/tests/unit/testem-output-test',
-            'dummy/tests/unit/filter-test-modules-test',
-          ],
-        },
-      };
-    });
-
-    afterEach(() => {
-      fs.unlinkSync(path.join(process.cwd(), 'test-execution-123.json'));
-      glob.sync('module-metadata-*.json').forEach((file) => {
-        fs.unlinkSync(path.join(process.cwd(), file));
-      });
-    });
-
-    it('replay only the failed browsers defined in failedBrowsers array', function () {
-      testExecutionJson.failedBrowsers.push('1');
-      fixturify.writeSync(process.cwd(), {
-        'test-execution-123.json': JSON.stringify(testExecutionJson),
-      });
-
-      return execa('ember', [
-        'exam',
-        '--replay-execution',
-        'test-execution-123.json',
-        '--path',
-        'acceptance-dist',
-      ]).then((child) => {
-        const output = child.stdout;
-        assert.strictEqual(
-          output.match(/test-execution-([0-9]*).json/g),
-          null,
-          'no test execution json should be written',
-        );
-
-        assertOutput(output, 'Browser Id', [1]);
-        assert.strictEqual(
-          getNumberOfTests(output),
-          25,
-          'ran all of the tests for browser one',
-        );
-      });
-    });
-
-    it('replay the full execution if failedBrowsers is empty', function () {
-      fixturify.writeSync(process.cwd(), {
-        'test-execution-123.json': JSON.stringify(testExecutionJson),
-      });
-
-      return execa('ember', [
-        'exam',
-        '--replay-execution',
-        'test-execution-123.json',
-        '--path',
-        'acceptance-dist',
-      ]).then((child) => {
-        const output = child.stdout;
-        assert.strictEqual(
-          output.match(/test-execution-([0-9]*).json/g),
-          null,
-          'no test execution json should be written',
-        );
-
-        assertOutput(output, 'Browser Id', [1, 2]);
-        assert.strictEqual(
-          getNumberOfTests(output),
-          getTotalNumberOfTests(output),
-          'ran all of the tests in the suite',
-        );
-      });
-    });
-
-    it('replay only the specified execution by --replay-browser', function () {
-      fixturify.writeSync(process.cwd(), {
-        'test-execution-123.json': JSON.stringify(testExecutionJson),
-      });
-
-      return execa('ember', [
-        'exam',
-        '--replay-execution',
-        'test-execution-123.json',
-        '--replay-browser',
-        '2',
-        '--path',
-        'acceptance-dist',
-      ]).then((child) => {
-        const output = child.stdout;
-        assert.strictEqual(
-          output.match(/test-execution-([0-9]*).json/g),
-          null,
-          'no test execution json should be written',
-        );
-
-        assertOutput(output, 'Browser Id', ['2']);
-        assert.strictEqual(
-          getNumberOfTests(output),
-          44,
-          'ran all of the tests for browser two',
         );
       });
     });

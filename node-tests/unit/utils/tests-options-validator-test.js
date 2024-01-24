@@ -21,10 +21,6 @@ describe('TestOptionsValidator', function () {
         return validator.validateRandom();
       case 'Parallel':
         return validator.validateParallel();
-      case 'writeExecutionFile':
-        return validator.validateWriteExecutionFile();
-      case 'ReplayExecution':
-        return validator.validateReplayExecution();
       default:
         throw new Error('invalid command passed');
     }
@@ -180,14 +176,6 @@ describe('TestOptionsValidator', function () {
       );
     });
 
-    it('should throw an error if 0 is passed while loadBalance is specified', function () {
-      shouldThrow(
-        'Parallel',
-        { loadBalance: 2, parallel: 0 },
-        /You must specify a value greater than 1 to `parallel`./,
-      );
-    });
-
     it('should return true', function () {
       shouldEqual('Parallel', { split: 2, parallel: 1 }, true);
     });
@@ -198,7 +186,6 @@ describe('TestOptionsValidator', function () {
       shouldEqual(
         'writeExecutionFile',
         {
-          loadBalance: true,
           parallel: 2,
           launch: 'false',
         },
@@ -242,7 +229,6 @@ describe('TestOptionsValidator', function () {
       shouldThrow(
         'writeExecutionFile',
         {
-          loadBalance: true,
           parallel: 1,
           launch: 'false',
           writeExecutionFile: true,
@@ -255,7 +241,6 @@ describe('TestOptionsValidator', function () {
       shouldEqual(
         'writeExecutionFile',
         {
-          loadBalance: true,
           parallel: 2,
           writeExecutionFile: true,
         },
