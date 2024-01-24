@@ -11,7 +11,6 @@ describe('TestemEvents', function () {
   beforeEach(function () {
     fs.mkdirpSync(fixtureDir);
     this.testemEvents = new TestemEvents(fixtureDir);
-    this.moduleQueue = ['foo', 'bar', 'baz', 'boo', 'far', 'faz'];
   });
 
   afterEach(function () {
@@ -211,7 +210,6 @@ describe('TestemEvents', function () {
     });
 
     it('should clean up states from stateManager when all launched browsers exited', function () {
-      this.testemEvents.stateManager.setTestModuleQueue([]);
       this.testemEvents.stateManager.addToStartedLaunchers(1010);
       this.testemEvents.stateManager.addToStartedLaunchers(1011);
 
@@ -224,20 +222,6 @@ describe('TestemEvents', function () {
       );
 
       assert.deepEqual(this.testemEvents.stateManager.getModuleMap().size, 0);
-      assert.deepEqual(this.testemEvents.stateManager.getTestModuleQueue(), []);
-
-      this.testemEvents.completedBrowsersHandler(
-        2,
-        1011,
-        mockUi,
-        new Map(),
-        '0000',
-      );
-
-      assert.deepEqual(
-        this.testemEvents.stateManager.getTestModuleQueue(),
-        null,
-      );
     });
   });
 });
