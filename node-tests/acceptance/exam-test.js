@@ -521,7 +521,6 @@ describe('Acceptance | Exam Command', function () {
             'dummy/tests/unit/multiple-tests-test',
             'dummy/tests/unit/testem-output-test',
             'dummy/tests/unit/weight-test-modules-test',
-            'dummy/tests/unit/async-iterator-test',
             'dummy/tests/unit/filter-test-modules-test',
           ],
         },
