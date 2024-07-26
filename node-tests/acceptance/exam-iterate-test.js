@@ -79,7 +79,7 @@ describe('Acceptance | Exam Iterate Command', function () {
       );
       assert.strictEqual(error.exitCode, 1);
       assert.strictEqual(error.failed, true);
-      assert.strictEqual(error.killed, false);
+      assert.strictEqual(error.isTerminated, false);
     });
   });
 
@@ -173,7 +173,7 @@ describe('Acceptance | Exam Iterate Command', function () {
         assertExpectRejection,
         (error) => {
           assert.strictEqual(error.exitCode, 1);
-          assert.strictEqual(error.killed, false);
+          assert.strictEqual(error.isTerminated, false);
         },
       );
     });
