@@ -58,6 +58,7 @@
     "@ember/string": "^3.1.1",
     "@ember/test-helpers": "^3.2.1",
     "@embroider/test-setup": "^3.0.3",
+    "@glint/core": "^1.4.0",
     "@release-it-plugins/lerna-changelog": "^6.1.0",
     "auto-dist-tag": "^2.1.1",
     "chai": "^5.0.0",
@@ -137,7 +138,6 @@
     }
   },
   "volta": {
-    "node": "18.19.0",
-    "yarn": "1.22.19"
+    "node": "18.19.0"
   }
 }

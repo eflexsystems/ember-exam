@@ -19,7 +19,6 @@ const command = [
 module.exports = async function () {
   return {
     command,
-    useYarn: true,
     scenarios: [
       {
         name: 'ember-lts-4.8',
