@@ -24,6 +24,7 @@ describe('Unit | Mocha | patch-testem-output', function () {
       ).to.equal('test_module | test_name');
     });
   });
+
   describe('`preserveTestName` is not passed', function () {
     it('adds partition number to test name when `split` is passed', function () {
       expect(
