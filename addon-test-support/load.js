@@ -1,5 +1,5 @@
-import EmberExamTestLoader from './-private/ember-exam-test-loader';
-import { patchTestemOutput } from './-private/patch-testem-output';
+import EmberExamTestLoader from '@eflexsystems/ember-exam/test-support/-private/ember-exam-test-loader';
+import { patchTestemOutput } from '@eflexsystems/ember-exam/test-support/-private/patch-testem-output';
 
 let loaded = false;
 

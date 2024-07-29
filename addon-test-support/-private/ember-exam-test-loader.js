@@ -1,6 +1,6 @@
-import getUrlParams from './get-url-params';
-import splitTestModules from './split-test-modules';
-import { filterTestModules } from './filter-test-modules';
+import getUrlParams from '@eflexsystems/ember-exam/test-support/-private/get-url-params';
+import splitTestModules from '@eflexsystems/ember-exam/test-support/-private/split-test-modules';
+import { filterTestModules } from '@eflexsystems/ember-exam/test-support/-private/filter-test-modules';
 import { TestLoader } from '@eflexsystems/ember-mocha/test-loader';
 
 /**
