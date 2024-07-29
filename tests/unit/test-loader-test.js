@@ -15,6 +15,8 @@ describe('Unit | Mocha | test-loader', function () {
       'test-3-test': true,
       'test-4-test': true,
     };
+
+    window.require.unsee = () => {};
     this.originalURLParams = EmberExamTestLoader._urlParams;
   });
 
