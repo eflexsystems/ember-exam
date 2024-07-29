@@ -62,14 +62,14 @@ describe('Acceptance | Exam Iterate Command', function () {
     });
   });
 
-  it('should test the app with additional options passed in and catch failure cases', function () {
+  it('should test the app with additional options passed in and catch failure cases', async function () {
     const execution = execa('ember', [
       'exam:iterate',
       '2',
       '--options',
       '--parallel',
     ]);
-    return execution.then(assertExpectRejection, (error) => {
+    return execution.catch(assertExpectRejection, (error) => {
       const splitErrorRE =
         /You must specify the `split` option in order to run your tests in parallel./g;
 
@@ -169,7 +169,7 @@ describe('Acceptance | Exam Iterate Command', function () {
     });
 
     it('should have an exitCode of 1 when a test fails', function () {
-      return execa('ember', ['exam:iterate', '1']).then(
+      return execa('ember', ['exam:iterate', '1']).catch(
         assertExpectRejection,
         (error) => {
           assert.strictEqual(error.exitCode, 1);
