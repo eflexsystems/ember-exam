@@ -3,7 +3,6 @@
 const assert = require('assert');
 const MockProject = require('ember-cli/tests/helpers/mock-project');
 const Task = require('ember-cli/lib/models/task');
-const RSVP = require('rsvp');
 const sinon = require('sinon');
 
 const ExamCommand = require('../../../lib/commands/exam');
@@ -47,12 +46,12 @@ describe('ExamCommand', function () {
       command.tasks.Test.prototype.run = function (options) {
         called.testRun = true;
         called.testRunOptions = options;
-        return RSVP.resolve();
+        return Promise.resolve();
       };
 
       command.tasks.Build.prototype.run = function () {
         called.buildRun = true;
-        return RSVP.resolve();
+        return Promise.resolve();
       };
     });
 
