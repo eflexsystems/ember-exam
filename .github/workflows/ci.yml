@@ -2,64 +2,78 @@ name: CI Build
 
 on:
   push:
-    branches: [ master, 'v*' ]
+    branches: [ master, main, 'v*' ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, main ]
 
+concurrency:
+  group: ci-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
     name: Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: volta-cli/action@v1
-      - run: yarn install --frozen-lockfile
-      - run: yarn lint
-      - run: yarn test:ember
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npm run lint
+      - run: npm run test:ember
+
+  test-node:
+    name: Node Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npm run test:node
 
   floating-dependencies:
     name: "Floating Dependencies"
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: volta-cli/action@v1
-      - run: yarn install --no-lockfile
-      - run: yarn test:ember
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npm run test:ember
 
   try-scenarios:
     name: "Try: ${{ matrix.ember-try-scenario }}"
-
     runs-on: ubuntu-latest
-
+    timeout-minutes: 10
     needs: test
 
     strategy:
       fail-fast: false
       matrix:
         ember-try-scenario:
-          - ember-default-with-jquery
-          - ember-default-with-mocha
-          - ember-classic
           - embroider-safe
-          - embroider-safe-with-mocha
           - embroider-optimized
-          - embroider-optimized-with-mocha
-          - ember-lts-3.24
-          - ember-lts-3.20
+          - ember-lts-4.12
           - ember-release
           - ember-beta
           - ember-canary
-          - ember-qunit-4
 
     steps:
       - uses: actions/checkout@v2
-      - uses: volta-cli/action@v1
+      - uses: actions/setup-node@v4
         with:
-          node-version: 12.x
+          node-version: 20
       - name: install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm install
       - name: test
         run: node_modules/.bin/ember try:one ${{ matrix.ember-try-scenario }} --skip-cleanup

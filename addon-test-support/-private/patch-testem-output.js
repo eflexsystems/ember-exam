@@ -10,21 +10,15 @@
  */
 export function updateTestName(urlParams, testName) {
   const split = urlParams.get('split');
-  const loadBalance = urlParams.get('loadBalance');
 
   const partition = urlParams.get('partition') || 1;
-  const browser = urlParams.get('browser') || 1;
 
   const preserveTestName = !!urlParams.get('preserveTestName');
 
   if (preserveTestName) {
     return testName;
-  } else if (split && loadBalance) {
-    testName = `Exam Partition ${partition} - Browser Id ${browser} - ${testName}`;
   } else if (split) {
     testName = `Exam Partition ${partition} - ${testName}`;
-  } else if (loadBalance) {
-    testName = `Browser Id ${browser} - ${testName}`;
   }
 
   return testName;

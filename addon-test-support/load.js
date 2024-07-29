@@ -1,5 +1,5 @@
-import { patchTestemOutput } from './-private/patch-testem-output';
-import getTestLoader from './-private/get-test-loader';
+import EmberExamTestLoader from '@eflexsystems/ember-exam/test-support/-private/ember-exam-test-loader';
+import { patchTestemOutput } from '@eflexsystems/ember-exam/test-support/-private/patch-testem-output';
 
 let loaded = false;
 
@@ -17,7 +17,7 @@ export default function loadEmberExam() {
   }
 
   loaded = true;
-  const EmberExamTestLoader = getTestLoader();
+
   const testLoader = new EmberExamTestLoader(window.Testem);
 
   if (window.Testem) {

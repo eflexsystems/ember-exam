@@ -1,6 +1,6 @@
-import getUrlParams from './get-url-params';
-import splitTestModules from './split-test-modules';
-import { filterTestModules } from './filter-test-modules';
+import getUrlParams from '@eflexsystems/ember-exam/test-support/-private/get-url-params';
+import splitTestModules from '@eflexsystems/ember-exam/test-support/-private/split-test-modules';
+import { filterTestModules } from '@eflexsystems/ember-exam/test-support/-private/filter-test-modules';
 import { TestLoader } from '@eflexsystems/ember-mocha/test-loader';
 
 /**
@@ -9,7 +9,7 @@ import { TestLoader } from '@eflexsystems/ember-mocha/test-loader';
  * @class EmberExamMochaTestLoader
  * @extends {TestLoader}
  */
-export default class EmberExamMochaTestLoader extends TestLoader {
+export default class EmberExamTestLoader extends TestLoader {
   constructor(testem, urlParams) {
     super();
     this._testModules = [];
@@ -74,7 +74,7 @@ export default class EmberExamMochaTestLoader extends TestLoader {
       this._testModules = filterTestModules(
         this._testModules,
         modulePath,
-        filePath
+        filePath,
       );
     }
 

@@ -1,12 +1,8 @@
 import loadEmberExam from '@eflexsystems/ember-exam/test-support/load';
-import {
-  dependencySatisfies,
-  macroCondition,
-  importSync,
-} from '@embroider/macros';
+import { start as mochaStart } from '@eflexsystems/ember-mocha';
 
 /**
- * Equivalent to ember-qunit or ember-mocha's loadTest() except this does not create a new TestLoader instance
+ * Equivalent to ember-qunit's loadTest() except this does not create a new TestLoader instance
  *
  * @function loadTests
  * @param {*} testLoader
@@ -14,7 +10,7 @@ import {
 function loadTests(testLoader) {
   if (testLoader === undefined) {
     throw new Error(
-      'A testLoader instance has not been created. You must call `loadEmberExam()` before calling `loadTest()`.'
+      'A testLoader instance has not been created. You must call `loadEmberExam()` before calling `loadTest()`.',
     );
   }
 
@@ -23,28 +19,16 @@ function loadTests(testLoader) {
 
 /**
  * Ember-exam's own start function to set up EmberExamTestLoader, load tests and calls start() from
- * ember-qunit or ember-mocha
+ * ember-qunit
  *
  * @function start
  * @param {*} qunitOptions
  */
-export default function start(qunitOptions) {
-  const modifiedOptions = qunitOptions || Object.create(null);
+export default function start(options) {
+  const modifiedOptions = options || Object.create(null);
   modifiedOptions.loadTests = false;
 
   const testLoader = loadEmberExam();
   loadTests(testLoader);
-
-  let emberTestFramework;
-  if (macroCondition(dependencySatisfies('ember-qunit', '*'))) {
-    emberTestFramework = importSync('ember-qunit');
-  } else if (
-    macroCondition(dependencySatisfies('@eflexsystems/ember-mocha', '*'))
-  ) {
-    emberTestFramework = importSync('@eflexsystems/ember-mocha');
-  }
-
-  if (emberTestFramework.start) {
-    emberTestFramework.start(modifiedOptions);
-  }
+  mochaStart(modifiedOptions);
 }
