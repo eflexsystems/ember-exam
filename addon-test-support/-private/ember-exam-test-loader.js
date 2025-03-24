@@ -33,7 +33,7 @@ export default class EmberExamTestLoader extends TestLoader {
 
   /**
    * require() collects the full list of modules before requiring each module with
-   * super.require, instead of requiring and unseeing a module when each gets loaded.
+   * super.require(), instead of requiring and unseeing a module when each gets loaded.
    *
    * @method require
    * @param {string} moduleName
